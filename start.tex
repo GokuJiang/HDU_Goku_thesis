@@ -1,7 +1,9 @@
 \documentclass{njubachelor}
-\usepackage{tabularx}  
-\sid{14108416} %学号
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
 
+\sid{14108416} %学号
 \cauthor{姜永铭} %学生姓名
 \ctitle{基于基因表达谱特征选择方法研究} %题目
 \cdepartment{卓越学院} %院系
@@ -17,6 +19,7 @@
 \pagenumbering{Roman}
 \thispagestyle{plain} %该页一般无页眉
 \vspace*{0em}
+
 \maketoc
 
 \newpage
@@ -121,11 +124,7 @@ $$SU(X,Y) = 2\cfrac{IG(X,Y)}{E(X)E(Y)}$$
 评价一个二分类模型的分类能力有一些指标，如：准确率(Accuracy)，召回率(Recall)，精确率(Precision)，特异性(Specifity) 和 F1 等等.
 
 混淆矩阵(Confusion Matrix): 混淆矩阵是一种特定的用来呈现算法性能的可视化效果的矩阵.混淆矩阵是用来反映某一分类模型的分类结果的，其中行代表的是真实的类，列代表的是模型的分类.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=3.5in]{pic/fig1}， 
-    \caption{混淆矩阵}
-\end{figure}
+
 
 如图1 所示，这里有4个指标，分别是正确的正样本(true positive,TP)，错误正样本(false positive, FP), 错误负样本(false negative，FN)，正确负样本(true negative, TN).
 
@@ -206,13 +205,7 @@ $$
 结合 Apriori 思想进行启发式选择
 
 Apriori 算法的思路是由频繁(k-1)-项集生成候选k-项集，然后根据最小支持度判断该候选k-项集是否是频繁k项集。那么问题在于，如何从频繁(k-1)-项集生成候选k-项集。其实就是利用Apriori的一个性质——一个频繁项集的任一子项集也应该是频繁子项集，所以一个项集是非频繁项集，那么它的超集也应该是非频繁项集。
-我们的研究也可以利用Apriori 算法的思想，通过项集来搜索出最优的特征子集，具体做法如下图2所示
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=5.5in]{pic/fig2}， 
-    \caption{Apriori思想生成项集候选项集}
-\end{figure}
+我们的研究也可以利用Apriori 算法的思想，通过项集来搜索出最优的特征子集，具体做法如图2所示
 
 这里，我们以输入数据集 $F=\{A,B,C,D,E\}$ 为例，图2 的基本流程是
 
@@ -227,50 +220,21 @@ Apriori 算法的思路是由频繁(k-1)-项集生成候选k-项集，然后根�
 
 \subsection{整体流程}
 如图3 所示，本研究的算法的主要流程就是先根据原始数据集生成若干特征子集，然后对特征子集进行评价，评价结果满足停止准则就下一步进行交叉验证，否则继续生成特征子集.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=4.5in]{pic/fig3}， 
-    \caption{算法整体流程图}
-\end{figure}
+
 
 这里的“生成特征子集”的步骤，采用上一小结中提到的Apriori的思想，在保证算法性能的的情况下，在尽可能小的特征空间中进行结果的搜索和评价。
 
 评价步骤，我们这里采用的逻辑斯蒂回归作为分类器进行特征子集的评价，以分类的准确率作为评价的标准。
+
 \subsection{实验步骤}
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=4.5in]{pic/fig4}， 
-    \caption{实验流程}
-\end{figure}
 
-我们的实验中使用的数据集由下表1所示，一共有六个数据集，分别是Colon、ALL1、Lymphoma、CNS、Adenoma和Gastric，这些数据集包含了两千到一万个特征数，来验证不同特征个数数据集的的表现能力。
+我们的实验中使用的数据集由表1所示，一共有六个数据集，分别是Colon、ALL1、Lymphoma、CNS、Adenoma和Gastric，这些数据集包含了两千到一万个特征数，来验证不同特征个数数据集的的表现能力。
 
-\begin{table}        
-\centering
-\caption{数据集}
-\begin{tabular}{ccc}
-\hline
-DataSet & Features & Sample Description\\
-\hline
-Colon & 2000 & Tumor/Normal\\
-ALL1 & 12625 & Bcell/Tcell\\
-Lymphoma & 4026 & ACL/GCL\\
-CNS & 7131 & Survivor/Treatment failure\\
-Adenoma & 7457 & Tumor/Normal\\
-Gastric & 22645 & non-malignant/tumor\\
-\hline
-\end{tabular}
-\end{table}
 
-对于每个数据集，我们都将我们的特征选择算法MAFilter与目前业界主流的方法，例如：TRank、WRank、CFS、FCBF、RRF和SVM-Rfe，分别选出各自的特征子集。然后利用SVM、KNN等分类器进行交叉验证。进而得到最终的结论。
+如图4所示，对于每个数据集，我们都将我们的特征选择算法MAFilter与目前业界主流的方法，例如：TRank、WRank、CFS、FCBF、RRF和SVM-Rfe，分别选出各自的特征子集。然后利用SVM、KNN等分类器进行交叉验证。进而得到最终的结论。
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=5.5in]{pic/fig5}， 
-    \caption{算法流程描述}
-\end{figure}
 
-在利用MIC值选择候选集时，我们假设任意两个变量之间存在某种相关性. 首先计算特征变量 $X$ 内部两两变量之间的MIC值，形成一个二维矩阵 $A$， 然后计算特征变量 $X$ 和目标变量 $Y$ 之间MIC值，生成一个向量 $b$.然后我们设定一个阈值 $r$.
+如图5所示，在利用MIC值选择候选集时，我们假设任意两个变量之间存在某种相关性. 首先计算特征变量 $X$ 内部两两变量之间的MIC值，形成一个二维矩阵 $A$， 然后计算特征变量 $X$ 和目标变量 $Y$ 之间MIC值，生成一个向量 $b$.然后我们设定一个阈值 $r$.
 
 1）选取第一个特征：
 
@@ -281,20 +245,292 @@ Gastric & 22645 & non-malignant/tumor\\
 设当前待选特征为第 $j$ 个特征，遍历 $A$ 中的每一行，记为第 $i$ 行，若$a_{ij} > r$, 就说明两个特征之间相关度较低，彼此较独立，那么我们就将特征子集$\{i，j\}$，加入到候选集 $F_2$ 中.
 
 3）选取第三个特征：
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=5.5in]{pic/fig6}， 
-    \caption{选取第三个特征算法流程}
-\end{figure}
 
-在候选集$F_k（k>2）$中选取每一个特征子集，记为 $H_m$. 在矩阵 $A$ 中查出 $H_m$ 任意两对特征组合的mic值，记其中最小的值为 $a_min$ .记当前待选特征为第 $i$ 个特征，找到当前特征与Hm中每一个特征间mic值的最大值，记为$max_mic$.若$max_mic < a_min$ ,则将 $\{H_m ，i\}$ 添加到 下一候选集Fk+1 中.
+如图6所示，在候选集$F_k（k>2）$中选取每一个特征子集，记为 $H_m$. 在矩阵 $A$ 中查出 $H_m$ 任意两对特征组合的mic值，记其中最小的值为 $a_min$ .记当前待选特征为第 $i$ 个特征，找到当前特征与Hm中每一个特征间mic值的最大值，记为$max_mic$.若$max_mic < a_min$ ,则将 $\{H_m ，i\}$ 添加到 下一候选集Fk+1 中.
 之后，设置一个准确率的阈值$Acc$，利用LogisticRegression算法，评价特征组合的分类效果. 对计算结果进行排序，找到准确率最高的特征组合，就是我们要找的最好的组合.
 
 \subsection{算法伪代码}
-
 \newpage
+\begin{algorithm}
+    \caption{MAFilter}
+    \begin{algorithmic}[1]
+        \REQUIRE ~~
+        1）含有正(P) 样本和负(N)样本的二分类生物数据集.数据集的特征（F）维度为N，样本数为M;\\
+        2）Mic阈值;\\
+        3) 分类模型 A （默认为Logstic回归算法);\\
+        4) 最大特征数 $$CutOffMaxFeatureNum$$ (默认为10)\\
+        \ENSURE ~~
+        准确率最高的特征子集;
+        \STATE The initial set of features subset is $M_0 =\{\}$, where $M_0$ is a empty set.
+        \STATE The initial set of features candidate  set is $C_0 =\{i | i \text{is index of features}\}$
+        \FOR{each $i \in [0...n-1]$}
+            \STATE $M_{i+1}=\{\}$
+            \STATE $C_{i+1}=\{\}$
+            \STATE $m = $ the size of $M_i$
+            \FOR{each $j \in [0...m-1]$}
+                \IF{$i<3$}
+                    \STATE mic = the mic value between $X[i]$ and $y$.
+                    \IF{$mic > max_mic$}
+                        \STATE $C_{i+1} = C_{i+1} \cup \{i \cup C_i[m]\} $
+                    \ENDIF
+                \ELSE
+                    \STATE $mics = $ the mic value between $X[i]$ and all the feature of $M_i$
+                    \STATE $max_mic = $ max mic value between two items in $M_i$
+                    \IF{$\text{any one for } mics < max_mic$}
+                        \STATE $C_{i+1} = C_{i+1} \cup \{i \cup C_{i}[m]\}$
+                    \ENDIF    
+                \ENDIF
+            \ENDFOR
+            \STATE The highest accuracy is set to overall accuracy in $M_i$
+            \FOR{the only featrue subset $F_S \supset M_i $}
+                \STATE sdf   
+            % \STATE $M_{i+1}=F_{S}\cup\f_{z}$, where $f_{z} \in F$, $f_{z} \not\in F_{S}$ and $(F_{S} \cup f_{z})$ is the best model
+            \ENDFOR
+        \ENDFOR
+        \RETURN the feature subsut $M^{'}\subset M_1 \cup M_2 \cup \dots \cup M_n$, where $M'$ has the best accuracy.
+    \end{algorithmic} 
+
+\end{algorithm}
+\newpage
+
+
 \section{实验结果分析}
 \subsection{实验结果数据}
+
+我们比较了WRank、TRank、CFS、FCBF、RFE、RRF特征选择算法在支持向量机(SVM)、k-最近邻(KNN)、朴素贝叶斯(NaiveBayes)、决策树(DTree)、逻辑斯蒂回归(LR)等分类模型中的分类表现能力。如表2-表7及图7-图12所示，只有在CNS数据集上，KNN分类模型跑输WRank、RFE和RRF算法；在CSN数据集上，NaiveBayes分类模型跑平WRank特征选择算法，以及在Colon数据集上，KNN分类模型跑平WRank特征选择算法。
+
+由此可以得出结论，我们的算法在绝大多数情况下选出来的特征子集与结果的相关度更高，其分类准确率要优于其他同类算法。这对于癌症诊断的判断至关重要。由于准确性的提高，从临床生物医学的角度来看会让医生判断病症时更加精准地判断患者的病症，真正做到提前预防，精确治疗的目的。
+
+
+
+\subsection{不足与展望}
+  为了获得到更高的准确性和更小的特征子集，本研究中牺牲了一定的时间和空间。从时间角度来看，本算法的耗时要远大于同类其他算法。大部分的时间消耗主要集中在，对于过大的候选子集中每个子集进行的表现性评价的计算。同时庞大的候选子集也占据了大量的内存空间，对计算机的存储和计算能力都是不小的挑战。未来，针对空间上的压力，可以考虑利用大数据计算框架，利用分布式集群来分摊存储上的压力；对于时间上的压力，考虑并行计算和GPU进行加速
+
+
+\newpage
+\pagenumbering{Roman}
+
+\begin{thebibliography}{99}
+\bibitem{citekey1} 参考文献条目一.
+\end{thebibliography}
+
+\newpage
+\ack
+
+致谢内容
+
+\newpage
+\appendix
+
+\section{附录}
+\subsection{附录A: 实验代码}
+\begin{lstlisting}[language=python,numbers=left]
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+import sklearn.metrics as metrics
+from minepy import MINE
+
+
+class McTwo(object):
+    def __init__(self,X,y,X_test,y_test,k):
+        self.mic_map = np.ones((X.shape[1],X.shape[1]))
+        self.mine = MINE(alpha=0.6, c=15)
+        self.X = X
+        self.y = y
+        self.X_test = X_test
+        self.y_test = y_test
+        self.k = k
+
+
+    def compute_mic(self,X,y):
+        self.mine.compute_score(X, y)
+        mic = self.mine.mic()
+        return mic
+
+    def genretate_MIC_map(self):
+        for i in range(self.X.shape[1]-1):
+            j = i+1
+            while(j < self.X.shape[1]):
+                mic =  self.compute_mic(self.X[:,i],self.X[:,j])
+                self.mic_map[i][j] = mic
+                self.mic_map[j][i] = mic
+                j+=1
+        return self.mic_map
+
+
+    def create_C1(self):
+        """
+        Create frequent candidate 1-itemset C1 by scaning data set.
+        Args:
+            data_set: A list of transactions. Each transaction contains several items.
+        Returns:
+            C1: A set which contains all frequent candidate 1-itemsets
+        """
+        C1 = []
+        for i in range(self.X.shape[1]):
+            C1.append([i])
+        return C1
+
+    def create_Candidation(self,front_candidation,index,max_mic=0.15):
+        print('begin generate candidataion:')
+        result = []
+        count = 0
+        for i in range(self.X.shape[1]):
+            for canditaion in front_candidation:
+                if count % 1000 == 0 and count!= 0:
+                    print('It has generated %d candidation'%count)
+                if i in canditaion:
+                    pass
+                if index <= 2:
+                        mic = self.compute_mic(self.X[:,i], self.y)
+                        if mic > max_mic:
+                            temp = [i]
+                            temp.extend(canditaion)
+                            result.append(temp)
+                            count += 1
+                elif index == 3:
+                    mic = self.mic_map[canditaion[0]][canditaion[1]]
+                    if mic > self.mic_map[i][canditaion[0]] and mic > self.mic_map[i][canditaion[1]]:
+                        temp = [i]
+                        temp.extend(canditaion)
+                        result.append(temp)
+                        count += 1
+
+                else:
+                    max_mic = 1
+                    for first_index in range(len(canditaion) - 1):
+                        current = canditaion[first_index]
+                        last_index = first_index + 1
+                        while last_index < len(canditaion):
+                            next = canditaion[last_index]
+                            mic = self.mic_map[current][next]
+                            if mic < max_mic:
+                                max_mic = mic
+                            last_index += 1
+                        if self.mic_map[current][i] < max_mic:
+                            temp = [i]
+                            temp.extend(canditaion)
+                            result.append(temp)
+                            count += 1
+                            break
+        print('end generate candidataion:')
+        return result
+
+
+
+    def run(self,min_acc=0.5):
+        self.genretate_MIC_map()
+        result = {}
+        c = self.create_C1()
+        max_acc = min_acc
+        size = 0
+        for key in range(self.k):
+            last_c = []
+            for index in c:
+                X_train_sub = np.array([self.X[:, i] for i in index]).T
+                X_test_sub = np.array([self.X_test[:, i] for i in index]).T
+                clf = LogisticRegression()
+                clf.fit(X_train_sub, self.y)
+                y_predit = clf.predict(X_test_sub)
+                acc = metrics.accuracy_score(y_true=self.y_test, y_pred=y_predit)
+                size += 1
+                if size % 200000 == 0:
+                    print(size)
+                if acc >= max_acc:
+                    if key not in result.keys():
+                        result[key] = [{
+                            "acc":acc,
+                            "features":index
+                        }]
+                    else:
+                        result[key].append({
+                            "acc":acc,
+                            "features":index
+                        })
+                    last_c.append(index)
+            if(key not in result.keys()):
+                break
+            result[key] = sorted(result[key],key=lambda item:item["acc"], reverse=True)
+            max_acc = result[key][0]['acc']
+            c = self.create_Candidation(last_c,key+2,0.68)
+        return result[list(result.keys())[len(result.keys())-1]][0]["features"]
+\end{lstlisting}
+\newpage
+
+
+\subsection{附录B: 图片和表格}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=3.5in]{pic/fig1}， 
+  \caption{混淆矩阵}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=5.5in]{pic/fig2}， 
+    \caption{Apriori思想生成项集候选项集}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=4.5in]{pic/fig3}， 
+    \caption{算法整体流程图}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=4.5in]{pic/fig4}， 
+    \caption{实验流程}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5.5in]{pic/fig5}， 
+  \caption{算法流程描述}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5.5in]{pic/fig6}， 
+  \caption{算法流程描述，选取三个以上特征}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig7}， 
+  \caption{Lyphoma结果比较}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig8}， 
+  \caption{Gastric结果比较}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig9}， 
+  \caption{ALL1结果比较}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig10}， 
+  \caption{T1D结果比较}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig11}， 
+  \caption{Colon结果比较}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=5in]{pic/fig12}， 
+  \caption{CNS结果比较}
+\end{figure}
 
 \begin{table}        
 \centering
@@ -405,32 +641,6 @@ RRF&	0.683333&	0.700000&	0.716667&	0.733333&	0.733333\\
 \end{tabular}
 \end{table}
 
-我们比较了WRank、TRank、CFS、FCBF、RFE、RRF特征选择算法在支持向量机(SVM)、k-最近邻(KNN)、朴素贝叶斯(NaiveBayes)、决策树(DTree)、逻辑斯蒂回归(LR)等分类模型中的分类表现能力。如上表所示，只有在CNS数据集上，KNN分类模型跑输WRank、RFE和RRF算法；在CSN数据集上，NaiveBayes分类模型跑平WRank特征选择算法，以及在Colon数据集上，KNN分类模型跑平WRank特征选择算法。
-由此可以得出结论，我们的算法在绝大多数情况下选出来的特征子集与结果的相关度更高，其分类准确率要优于其他同类算法。这对于癌症诊断的判断至关重要。由于准确性的提高，从临床生物医学的角度来看会让医生判断病症时更加精准地判断患者的病症，真正做到提前预防，精确治疗的目的。
 
-\subsection{不足与展望}
-  为了获得到更高的准确性和更小的特征子集，本研究中牺牲了一定的时间和空间。从时间角度来看，本算法的耗时要远大于同类其他算法。大部分的时间消耗主要集中在，对于过大的候选子集中每个子集进行的表现性评价的计算。同时庞大的候选子集也占据了大量的内存空间，对计算机的存储和计算能力都是不小的挑战。未来，针对空间上的压力，可以考虑利用大数据计算框架，利用分布式集群来分摊存储上的压力；对于时间上的压力，考虑并行计算和GPU进行加速
-
-
-\newpage
-\pagenumbering{Roman}
-
-\begin{thebibliography}{99}
-\bibitem{citekey1} 参考文献条目一.
-\end{thebibliography}
-
-\newpage
-\ack
-
-致谢内容
-
-\newpage
-\appendix
-
-\section{附录一}
-
-\subsection{附录 1.1}
-
-附录内容
 
 \end{document}

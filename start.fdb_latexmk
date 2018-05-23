@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1527077096 "/Users/goku/Desktop/LaTex/paperGoku/start.tex" "start.pdf" "start" 1527077096
-  "/Users/goku/Desktop/LaTex/paperGoku/start.tex" 1527077095 27703 1a456ebe6181f287050d006c633b6fd2 ""
+["pdflatex"] 1527082736 "/Users/goku/Desktop/LaTex/paperGoku/start.tex" "start.pdf" "start" 1527082736
+  "/Users/goku/Desktop/LaTex/paperGoku/start.tex" 1527082735 35347 830cbeac3697b6f30c2db7cea7ac7a4a ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1480098701 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1480098701 1288 655e228510b4c2a1abe905c368440826 ""
@@ -17,9 +17,9 @@
   "/usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf" 1522066949 33362 cf75436e19743e94a92a6b1b9183c434 ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1526971791 4220280 e0535eaf51da7fc7fede3736d155dd1d ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "njubachelor.cls" 1527072622 12570 c0c70693037917418203eae20cd8fe27 ""
-  "start.aux" 1527077096 8 a94a2480d3289e625eea47cd1b285758 ""
-  "start.tex" 1527077096 27703 1a456ebe6181f287050d006c633b6fd2 ""
+  "njubachelor.cls" 1527081458 12570 c0c70693037917418203eae20cd8fe27 ""
+  "start.aux" 1527082736 8 a94a2480d3289e625eea47cd1b285758 ""
+  "start.tex" 1527082735 35347 830cbeac3697b6f30c2db7cea7ac7a4a ""
   (generated)
-  "start.pdf"
   "start.log"
+  "start.pdf"
